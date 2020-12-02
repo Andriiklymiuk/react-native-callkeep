@@ -459,9 +459,9 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void backToForeground() {
         Context context = getAppContext();
+        String packageName = context.getApplicationContext().getPackageName();
         final Intent focusIntent = context.getPackageManager().getLaunchIntentForPackage(packageName).cloneFilter();
         final Activity activity = getCurrentActivity();
-        Activity activity = getCurrentActivity();
         boolean isOpened = activity != null;
         Log.d(TAG, "backToForeground, app isOpened ?" + (isOpened ? "true" : "false"));
 
