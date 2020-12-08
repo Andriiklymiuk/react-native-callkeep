@@ -557,7 +557,7 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     private static boolean isCallAccountsAvailable() {
-        return telecomManager.getPhoneAccount(handle) != null ? true : false;
+        return telecomManager.getCallCapablePhoneAccounts().isEmpty() ? false : true;
     }
 
     private void registerReceiver() {
