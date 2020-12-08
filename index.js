@@ -156,6 +156,9 @@ class RNCallKeep {
   hasPhoneAccount = async () =>
     isIOS ? true : await RNCallKeepModule.hasPhoneAccount();
 
+  isCallAccountsAvailable = async () =>
+    isIOS ? true : await RNCallKeepModule.isCallAccountsAvailable();
+
   hasOutgoingCall = async () =>
     isIOS ? null : await RNCallKeepModule.hasOutgoingCall();
 

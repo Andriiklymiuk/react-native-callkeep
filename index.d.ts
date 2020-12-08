@@ -113,6 +113,11 @@ declare module 'react-native-callkeep' {
      */
     static hasPhoneAccount(): Promise<boolean>
 
+    /**
+      * @description isCallAccountsAvailable method is available only on Android.
+      */
+    static isCallAccountsAvailable(): Promise<boolean>
+
     static hasOutgoingCall(): Promise<boolean>
 
     /**

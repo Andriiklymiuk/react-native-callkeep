@@ -376,6 +376,11 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void isCallAccountsAvailable(Promise promise) {
+        promise.resolve(isCallAccountsAvailable());
+    }
+
+    @ReactMethod
     public void hasOutgoingCall(Promise promise) {
         promise.resolve(VoiceConnectionService.hasOutgoingCall);
     }
@@ -549,6 +554,10 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     private static boolean hasPhoneAccount() {
         return isConnectionServiceAvailable() && telecomManager != null
             && telecomManager.getPhoneAccount(handle) != null && telecomManager.getPhoneAccount(handle).isEnabled();
+    }
+
+    private static boolean isCallAccountsAvailable() {
+        return telecomManager.getPhoneAccount(handle) != null ? true : false;
     }
 
     private void registerReceiver() {
