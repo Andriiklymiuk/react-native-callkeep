@@ -433,6 +433,10 @@ RCT_EXPORT_METHOD(isCallActive:(NSString *)uuidString)
 #ifdef DEBUG
     NSLog(@"[RNCallKeep][reportNewIncomingCall] uuidString = %@", uuidString);
 #endif
+    RNCallKeep *callKeep = [RNCallKeep allocWithZone: nil];
+    if (callKeep.callKeepCallController.callObserver.calls.count > 0){
+        return;
+    }
     int _handleType = [RNCallKeep getHandleType:handleType];
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
     CXCallUpdate *callUpdate = [[CXCallUpdate alloc] init];

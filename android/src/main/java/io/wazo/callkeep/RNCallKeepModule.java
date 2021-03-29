@@ -450,6 +450,11 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void isCallAccountsAvailable(Promise promise) {
+        promise.resolve(isCallAccountsAvailable());
+    }
+
+    @ReactMethod
     public void hasOutgoingCall(Promise promise) {
         promise.resolve(VoiceConnectionService.hasOutgoingCall);
     }
@@ -538,9 +543,9 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void backToForeground() {
         Context context = getAppContext();
+        String packageName = context.getApplicationContext().getPackageName();
         final Intent focusIntent = context.getPackageManager().getLaunchIntentForPackage(packageName).cloneFilter();
         final Activity activity = getCurrentActivity();
-        Activity activity = getCurrentActivity();
         boolean isOpened = activity != null;
         Log.d(TAG, "backToForeground, app isOpened ?" + (isOpened ? "true" : "false"));
 
@@ -628,6 +633,10 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     private static boolean hasPhoneAccount() {
         return isConnectionServiceAvailable() && telecomManager != null
             && telecomManager.getPhoneAccount(handle) != null && telecomManager.getPhoneAccount(handle).isEnabled();
+    }
+
+    private static boolean isCallAccountsAvailable() {
+        return telecomManager.getCallCapablePhoneAccounts().isEmpty() ? false : true;
     }
 
     private void registerReceiver() {
